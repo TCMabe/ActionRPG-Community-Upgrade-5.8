@@ -1,0 +1,9 @@
+/Binaries/
+/DerivedDataCache/
+/Intermediate/
+/Saved/
+/Artifacts/
+/Build/Windows/FileOpenOrder/
+/.vs/
+*.sln
+*.suo
