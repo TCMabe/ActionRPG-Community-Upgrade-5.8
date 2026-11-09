@@ -1,6 +1,6 @@
 # Licensing and attribution
 
-This repository is an unofficial community upgrade of Epic Games' ActionRPG sample to Unreal Engine 5.8.4. It is provided free of charge for Unreal Engine development and learning.
+This repository is an unofficial community upgrade of Epic Games' ActionRPG sample to modern versions of Unreal Engine. It is provided free of charge for Unreal Engine development and learning.
 
 Epic Games retains ownership of its original sample code, artwork, animations, audio, and other materials. Original copyright, trademark, and proprietary notices are retained. The upgrade does not replace the agreements governing Epic-origin materials or grant additional rights to those materials.
 

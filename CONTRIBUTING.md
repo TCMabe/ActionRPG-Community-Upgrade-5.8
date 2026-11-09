@@ -1,6 +1,6 @@
 # Contributing
 
-This repository maintains the **Community Upgrade**: the original ActionRPG sample with compatibility fixes, documentation, and reproducible checks on UE 5.8.4. Expanded dungeon generation, new class systems, and multiplayer development belong to the separate Community Mod.
+This repository maintains the **Community Upgrade**: the original ActionRPG sample with compatibility fixes, documentation, and reproducible checks. The `main` branch targets UE 5.8.4; this experimental `preview/ue5.9` branch targets UE 5.9 Preview. Read [preview validation status](Docs/UE59_PREVIEW.md) before contributing here. Expanded dungeon generation, new class systems, and multiplayer development belong to the separate Community Mod.
 
 ## Before changing content
 

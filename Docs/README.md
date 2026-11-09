@@ -2,6 +2,8 @@
 
 These guides describe the **actual Community Upgrade sample** on Unreal Engine 5.8.4. They do not assume the proposed Community Mod, PCG dungeon manager, multiplayer, or IGF integration exists.
 
+On the `preview/ue5.9` branch, the same gameplay architecture is retained. See [5.9 preview validation](UE59_PREVIEW.md) for the current engine/build status; commands below that name UE_5.8 refer to the original documentation baseline and should use UE_5.9 when working in this preview checkout.
+
 ## Start here
 
 1. Follow the root [README](../README.md) to build and open `ActionRPG.uproject`.

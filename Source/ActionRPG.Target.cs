@@ -11,7 +11,7 @@ public class ActionRPGTarget : TargetRules
 		Type = TargetType.Game;
 		ExtraModuleNames.AddRange(new string[] { "ActionRPG" });
 
-		DefaultBuildSettings = BuildSettingsVersion.V7;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;
+		DefaultBuildSettings = BuildSettingsVersion.V8;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_9;
 	}
 }

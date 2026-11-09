@@ -59,6 +59,12 @@ function Assert-AutomationReport {
         [int]$report.failed -ne 0 -or [int]$report.notRun -ne 0 -or [int]$report.inProcess -ne 0) {
         throw "Automation report is incomplete or failed: passed=$passed, failed=$($report.failed), notRun=$($report.notRun), inProcess=$($report.inProcess). See $ReportPath"
     }
+    foreach ($expectedTest in @('ActionRPG.Port.GASCooldownAndPossession', 'ActionRPG.Port.GoblinVariantInitialization')) {
+        $matchingTests = @($report.tests | Where-Object { $_.fullTestPath -eq $expectedTest -and $_.state -eq 'Success' })
+        if ($matchingTests.Count -ne 1) {
+            throw "Required test did not run successfully: $expectedTest. See $ReportPath"
+        }
+    }
     Write-Host "Automation report verified: $passed passed ($($report.succeededWithWarnings) with warnings)."
 }
 

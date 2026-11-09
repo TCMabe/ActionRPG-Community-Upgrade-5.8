@@ -11,7 +11,7 @@ public class ActionRPGEditorTarget : TargetRules
 		Type = TargetType.Editor;
 		ExtraModuleNames.AddRange(new string[] { "ActionRPG", "ActionRPGEditor" });
 
-		DefaultBuildSettings = BuildSettingsVersion.V7;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;
+		DefaultBuildSettings = BuildSettingsVersion.V8;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_9;
 	}
 }
