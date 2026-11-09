@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param(
-    [string]$EngineRoot = 'C:/Program Files/Epic Games/UE_5.8',
+    [string]$EngineRoot = 'C:/Program Files/Epic Games/UE_5.9',
+    [ValidatePattern('^5\.9\.\d+$')]
+    [string]$ExpectedEngineVersion = '5.9.0',
     [ValidateSet('Validate', 'Upgrade', 'Lighting', 'Package', 'All')]
     [string]$Phase = 'Validate',
     [switch]$RunAutomation
@@ -74,13 +76,16 @@ foreach ($required in @($projectFile, $buildTool, $editor, $uat, $versionFile)) 
     }
 }
 $version = Get-Content -LiteralPath $versionFile -Raw | ConvertFrom-Json
-if ($version.MajorVersion -ne 5 -or $version.MinorVersion -ne 8 -or $version.PatchVersion -ne 4) {
-    throw "This workflow targets UE 5.8.4; EngineRoot contains $($version.MajorVersion).$($version.MinorVersion).$($version.PatchVersion)."
+$actualVersion = "$($version.MajorVersion).$($version.MinorVersion).$($version.PatchVersion)"
+if ($actualVersion -ne $ExpectedEngineVersion) {
+    throw "This preview workflow expects UE $ExpectedEngineVersion; EngineRoot contains $actualVersion. Use the 5.8 main branch for the stable community baseline."
 }
 
 $savedRoot = "$projectRoot/Saved"
 $logRoot = "$savedRoot/Logs"
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
+$version | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath "$savedRoot/EngineBuildVersion.json" -Encoding UTF8
+Write-Host "Preview engine: $actualVersion, changelist $($version.Changelist), branch $($version.BranchName)"
 $editorArguments = @($projectFile, '-unattended', '-nop4', '-nosplash', '-stdout', '-FullStdOutLogOutput', '-UTF8Output')
 
 # Run from this project so relative Unreal paths consistently refer to this copy.
@@ -94,7 +99,7 @@ try {
         Invoke-CheckedNative -Label 'Repair sample compatibility assets' -Executable $editor -ArgumentList (
             $editorArguments + @('-run=RPGUpgradeSample', '-NullRHI', "-Abslog=`"$logRoot/Port-Upgrade.log`"")
         )
-        Invoke-CheckedNative -Label 'Resave project packages with UE 5.8.4' -Executable $editor -ArgumentList (
+        Invoke-CheckedNative -Label "Resave project packages with UE $actualVersion" -Executable $editor -ArgumentList (
             $editorArguments + @('-run=ResavePackages', '-ProjectOnly', '-IgnoreChangelist', '-NullRHI', "-Abslog=`"$logRoot/Port-Resave.log`"")
         )
     }

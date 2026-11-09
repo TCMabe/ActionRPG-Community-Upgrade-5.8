@@ -1,4 +1,12 @@
-# ActionRPG Community Upgrade — Unreal Engine 5.8.4
+# ActionRPG Community Upgrade — Unreal Engine 5.9 Preview investigation
+
+**Experimental branch: not yet validated on UE 5.9.** The published `main` branch remains the verified 5.8.4 baseline. This checkout is an isolated preview investigation; the 5.8.4 evidence below describes the starting point, not a successful 5.9 conversion.
+
+Read [5.9 preview status and verification](Docs/UE59_PREVIEW.md). The build workflow in this branch now defaults to UE_5.9 and expects 5.9.0; do not run its upgrade/resave phase against your stable 5.8 project.
+
+---
+
+## Original 5.8.4 baseline documentation
 
 This is a faithful Windows port of Epic's original ActionRPG sample. It retains the original gameplay, GAS abilities, assets, native class names, and source/content paths while addressing engine compatibility. This repository is the Community Upgrade: a faithful sample baseline, separate from the expanded Community Mod.
 
