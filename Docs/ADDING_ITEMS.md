@@ -1,4 +1,6 @@
-# Adding items in ActionRPG on Unreal Engine 5.8.4
+# Adding items in ActionRPG — UE 5.9 Preview
+
+This guide applies to the `preview/ue5.9` branch. It retains the item/GAS architecture documented for the 5.8.4 baseline. The 5.9 build and packaged inventory, shop, ability, and save checks are recorded in [preview validation](UE59_PREVIEW.md); individual new-item recipes still require their acceptance checks.
 
 This guide extends the sample's existing inventory and Gameplay Ability System (GAS). Make changes in a separate branch or project copy, keep the supplied assets as working references, and test both a fresh save and an existing save. Adding a weapon appearance, a new attack, and a new item sold in the shop are separate changes; start with one working variation before changing all three.
 
@@ -130,7 +132,7 @@ Exactly zero DefensePower is treated as 1. Source AttackPower and Damage are sna
 
 Inspect the actual damage effect's modifiers/execution settings, referenced curve table and row, and level scaling. Check both attack and defense attributes before assuming that a visually successful hit must remove health. See [RPGDamageExecution.cpp](../Source/ActionRPG/Private/Abilities/RPGDamageExecution.cpp) and [RPGAttributeSet.cpp](../Source/ActionRPG/Private/Abilities/RPGAttributeSet.cpp).
 
-For a mana skill, preserve and review its **Cost Gameplay Effect Class**, **Cooldown Gameplay Effect Class**, activation requirements, and commit path. A mana-cost effect should modify the intended Mana attribute; a cooldown needs a finite duration and the intended tag **granted to the owning ASC**. An effect's asset classification tag alone does not establish that granted cooldown state. In UE5.8, use the target-tag Gameplay Effect component (`UTargetTagsGameplayEffectComponent`) for granted tags, following the migrated working sample effects.
+For a mana skill, preserve and review its **Cost Gameplay Effect Class**, **Cooldown Gameplay Effect Class**, activation requirements, and commit path. A mana-cost effect should modify the intended Mana attribute; a cooldown needs a finite duration and the intended tag **granted to the owning ASC**. An effect's asset classification tag alone does not establish that granted cooldown state. In this 5.9 Preview port, use the target-tag Gameplay Effect component (`UTargetTagsGameplayEffectComponent`) for granted tags, following the migrated working sample effects.
 
 `GetCooldownRemainingForTag` queries active effect owning tags and reports the longest matching remaining duration. `Cooldown.Skill` is an existing registered tag. If several abilities use the same granted cooldown tag, test whether they intentionally share a cooldown. For independent cooldowns, introduce the appropriate distinct registered tags and update the effect, ability checks, and UI query together. Test activation with insufficient mana, during cooldown, at the end of cooldown, and after an interruption; verify costs and damage occur once at the intended moment.
 

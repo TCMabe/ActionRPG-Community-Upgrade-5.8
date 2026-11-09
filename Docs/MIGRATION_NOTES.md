@@ -1,6 +1,8 @@
 # Faithful ActionRPG sample migration
 
-Target: installed Unreal Engine 5.8.4, Windows Development. Original 4.27 project remains in the sibling ActionRPG folder. Native class names and existing asset paths are preserved.
+This document records the historical **4.27 → 5.8.4** conversion. For this branch's current engine, build requirements, and test results, read [UE 5.9 Preview validation](UE59_PREVIEW.md). The 5.8 versions and settings below describe the earlier migration, not commands to use for the preview.
+
+Historical target: installed Unreal Engine 5.8.4, Windows Development. Original 4.27 project remains in the sibling ActionRPG folder. Native class names and existing asset paths are preserved.
 
 ## Native compatibility and GAS changes
 

@@ -1,4 +1,6 @@
-# Adding enemies to ActionRPG for UE 5.8.4
+# Adding enemies to ActionRPG — UE 5.9 Preview
+
+This guide applies to the `preview/ue5.9` branch. The original enemy architecture and authoring flow are retained from 5.8.4. See [preview validation](UE59_PREVIEW.md) for the 5.9 build, GAS, and gameplay checks and their limits.
 
 This guide extends the sample's existing single-player enemy, Gameplay Ability System (GAS), and wave systems. Start with a working goblin variant, then replace its behavior or animation assets one dependency at a time. A mesh, a pawn Blueprint, an attack ability, and a wave entry are separate parts of an enemy; copying one does not register the others.
 
@@ -114,7 +116,7 @@ Existing registered tags are in [DefaultGameplayTags.ini](../Config/DefaultGamep
 
 The actual goblin melee connection is `GA_GoblinMelee.MontageToPlay` → `AM_Guardian_Attack`, with `EffectContainerMap[Event.Montage.Shared.WeaponHit]` using `RPGTargetType_UseEventData` and `GE_GoblinMelee`. Its ability tag is `Ability.Melee`. The ranged ability uses `AM_Guardian_Attack02`, `BP_SlimeBall`, and a container keyed by `Event.Montage.Shared.UseSkill`; its existing damage-effect reference is `GE_PlayerSkillFireball`. Preserve or deliberately replace that cross-folder reference—its filename does not mean it is unused by enemies.
 
-For a new cooldown, use a finite-duration Gameplay Effect that grants its cooldown tag through UE 5.8's **Grant Tags to Target Actor** component. The existing goblin ranged cooldown is `GE_GoblinRange` with `Cooldown.Goblin.Ranged`; this port repairs the legacy effect's missing tag. Copy it with care: inspect its inherited configuration as well as duration. Use a new registered cooldown tag when the new attack should cool down independently. Keeping the same tag intentionally shares the cooldown on that actor.
+For a new cooldown, use a finite-duration Gameplay Effect that grants its cooldown tag through the **Grant Tags to Target Actor** component used in this 5.9 Preview port. The existing goblin ranged cooldown is `GE_GoblinRange` with `Cooldown.Goblin.Ranged`; this port repairs the legacy effect's missing tag. Copy it with care: inspect its inherited configuration as well as duration. Use a new registered cooldown tag when the new attack should cool down independently. Keeping the same tag intentionally shares the cooldown on that actor.
 
 The custom [PlayMontageAndWaitForEvent task](../Source/ActionRPG/Private/Abilities/RPGAbilityTask_PlayMontageAndWaitForEvent.cpp) combines montage callbacks and gameplay-event listening. Preserve its existing Blueprint delegate meanings. A montage that visibly plays is only one stage of a working attack; validate that a hit actually applies damage once.
 
@@ -222,7 +224,7 @@ The shared `/Game/Blueprints/Weapon/WeaponActor` overlap graph requires `IsAttac
 
 Keep this inherited behavior in mind when testing mixed enemy variants in close proximity. Do not claim that the native team IDs prevent every friendly hit. If your extension needs explicit hostility rules, implement and test them consistently in the attack targeting path as a separate gameplay change. Also distinguish `Cast To BP_Character`/class-family checks from exact-class equality when auditing new Blueprint logic; replacing a cast with equality can exclude otherwise valid child enemies.
 
-`ActionRPG.Port.GoblinVariantInitialization` creates temporary child and duplicate Blueprints from Level 01, spawns and explicitly possesses them, and verifies inherited stats, melee ability, Enemy tag, and increased health after raising the larger variants to level 3 with `SetCharacterLevel`. These assets are transient and are not shipped as new enemies. The test passes on UE 5.8.4; it does not exercise automatic possession, AI navigation, animation damage, death, or wave progression.
+`ActionRPG.Port.GoblinVariantInitialization` creates temporary child and duplicate Blueprints from Level 01, spawns and explicitly possesses them, and verifies inherited stats, melee ability, Enemy tag, and increased health after raising the larger variants to level 3 with `SetCharacterLevel`. These assets are transient and are not shipped as new enemies. The test passes on both UE 5.8.4 and UE 5.9 Preview; it does not exercise automatic possession, AI navigation, animation damage, death, or wave progression.
 
 There is no diagnosed universal cause for every “my duplicate enemy does not work” report. Compare a fresh, unchanged child of Level 01 with your edited enemy in the same map and spawn group, then reintroduce differences one at a time. This separates shared sample behavior from a missing dependency or a new override.
 
@@ -247,4 +249,4 @@ Use a Windows Development package for the final test. Check its log for missing 
 - [ ] Mixed variants are tested together for the sample's exact-class overlap filtering behavior.
 - [ ] The same test passes in a freshly launched Windows Development package.
 
-The field names and graph descriptions in this guide were checked against the port's UE 5.8.4 reflected defaults and Blueprint graphs. New enemy variants described here are authoring examples, not additional enemies shipped or gameplay-tested as part of the baseline port.
+The field names and graph descriptions were originally checked against the 5.8.4 port's reflected defaults and Blueprint graphs. The 5.9 branch retains those assets byte-for-byte and passes Blueprint compilation and the initialization test above. New enemy variants described here are authoring examples, not additional enemies shipped or fully gameplay-tested as part of this preview.

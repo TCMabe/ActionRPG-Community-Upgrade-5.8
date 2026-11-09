@@ -62,6 +62,6 @@ Both targets use V8 build settings and the 5.9 include order. No runtime C++ API
 - [Original 5.8 migration history](Docs/MIGRATION_NOTES.md)
 - [Contributing](CONTRIBUTING.md)
 
-The authoring guides were established against the 5.8 sample and describe the retained gameplay architecture. Goblin child/duplicate initialization passes on 5.9; full new-enemy AI/combat/death/wave verification is still a separate requirement.
+The authoring guides describe this preview branch's retained gameplay architecture and use 5.9 Preview labels and commands. The earlier 5.8 conversion is documented as migration history. Goblin child/duplicate initialization passes on 5.9; full new-enemy AI/combat/death/wave verification is still a separate requirement.
 
 This is an unofficial, free community project. Preserve Epic notices and follow the applicable terms in [licensing and attribution](LICENSE.md). The engine, additional asset packs, and build outputs are not bundled.

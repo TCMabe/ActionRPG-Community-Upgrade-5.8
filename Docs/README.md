@@ -1,8 +1,8 @@
 # Content authoring documentation
 
-These guides describe the **actual Community Upgrade sample** on Unreal Engine 5.8.4. They do not assume the proposed Community Mod, PCG dungeon manager, multiplayer, or IGF integration exists.
+These guides describe the **Community Upgrade sample on UE 5.9 Preview**, on branch `preview/ue5.9`. They do not assume the proposed Community Mod, PCG dungeon manager, multiplayer, or IGF integration exists.
 
-On the `preview/ue5.9` branch, the same gameplay architecture is retained. See [5.9 preview validation](UE59_PREVIEW.md) for the current engine/build status; commands below that name UE_5.8 refer to the original documentation baseline and should use UE_5.9 when working in this preview checkout.
+The gameplay architecture is retained from the 5.8.4 baseline. See [5.9 preview validation](UE59_PREVIEW.md) for current results and limits. The `main` branch has the separate 5.8.4 documentation; [migration history](MIGRATION_NOTES.md) deliberately records the earlier conversion.
 
 ## Start here
 
@@ -37,7 +37,7 @@ The native item definitions are Data Assets, while character, weapon actor, abil
 The editor-only `RPGInspectContent` commandlet exports asset defaults, Blueprint graph nodes/pin links, progression table rows, and montage notifies. It does not save packages or create gameplay content.
 
 ```powershell
-$editor = 'C:/Program Files/Epic Games/UE_5.8/Engine/Binaries/Win64/UnrealEditor-Cmd.exe'
+$editor = 'C:/Program Files/Epic Games/UE_5.9/Engine/Binaries/Win64/UnrealEditor-Cmd.exe'
 $project = (Resolve-Path './ActionRPG.uproject').Path
 & $editor $project -run=RPGInspectContent -unattended -nop4 -NullRHI -nosound
 ```
@@ -46,9 +46,10 @@ Build the editor target first. The output is `Saved/DocsInspection.txt`; this ge
 
 ## Other references
 
-- [Migration notes and validation limits](MIGRATION_NOTES.md)
+- [5.9 Preview validation and limits](UE59_PREVIEW.md)
+- [Original 5.8.4 migration history](MIGRATION_NOTES.md)
 - [Contributing and reporting bugs](../CONTRIBUTING.md)
 - [Licensing and attribution](../LICENSE.md)
 - [Epic's original ActionRPG gameplay documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/building-gameplay-in-cplusplus-for-action-rpg?application_version=4.27)
 
-The 4.27 documentation explains the original architecture; use the guides in this repository for the 5.8 cooldown-component and migration details.
+The 4.27 documentation explains the original architecture; use this branch's guides for the retained cooldown-component setup and 5.9 Preview validation details.

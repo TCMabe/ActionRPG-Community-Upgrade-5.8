@@ -12,6 +12,8 @@ Both targets use `BuildSettingsVersion.V8` and `EngineIncludeOrderVersion.Unreal
 
 Validated compiler: MSVC 14.50.35739, Windows SDK 10.0.26100.0. The Blueprint audit reports zero errors, zero warnings, and zero failed loads. GAS automation reports two passing tests, one with the inherited empty-world navigation warning. Logs and generated reports remain local under `Saved`.
 
+The documented `RPGInspectContent` command was also run with UE 5.9 Preview and completed with zero errors/warnings. Authoring guide titles and the inspector command now name the current preview; the earlier 5.8 migration notes are explicitly historical. New-item/enemy examples still require their acceptance checks rather than being implied to have full gameplay coverage.
+
 ## Packaged results
 
 - Windows Development build/cook/stage/archive completed with UAT exit code 0; 1,382 packages were discovered in the cook. No cook warnings/errors were reported.
